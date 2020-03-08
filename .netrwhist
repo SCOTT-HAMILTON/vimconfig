@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/scott-hamilton/.vim/bundle/vim-commentary'
+let g:netrw_dirhist_3='/sys/bus/event_source/drivers'
+let g:netrw_dirhist_2='/sys/devices/power/subsystem'
+let g:netrw_dirhist_1='/GIT/libqgit2/build/CMakeFiles'
