@@ -3,40 +3,68 @@
 let mapleader = ","
 
  " Go to place holder character 
-nnoremap <Leader>fb /<ßß><CR>cf>
-inoremap <Leader>fb <Esc>/<ßß><CR>cf>
+nn <Leader>dv /<ßß><CR>cf>
+ino <Leader>dv <Esc>/<ßß><CR>cf>
 
  " \section
-nnoremap <Leader>s i\section{}<CR><ßß><Esc>k$i
+nn <Leader>s i\section{}<CR><ßß><Esc>k$i
  " \subsection
-nnoremap <Leader>Ss i\subsection{}<CR><ßß><Esc>k$i
+nn <Leader>Ss i\subsection{}<CR><ßß><Esc>k$i
  " \subsubsection
-nnoremap <Leader>SSs i\subsubsection{}<CR><ßß><Esc>k$i
+nn <Leader>SSs i\subsubsection{}<CR><ßß><Esc>k$i
  " \begin
-nnoremap <Leader>b i\begin{}<CR><Esc>ddi<ßß><Esc>k$i
+nn <Leader>b i\begin{}<CR><Esc>ddi<ßß><Esc>k$i
  " \begin{abstract}
-nnoremap <Leader>a i\begin{abstract}<CR><Esc>ddi
+nn <Leader>a i\begin{abstract}<CR><Esc>ddi
  " \end
-nnoremap <Leader>e i\end{}<CR><Esc>ddi<ßß><Esc>k$i
+nn <Leader>e i\end{}<CR><Esc>ddi<ßß><Esc>k$i
 
  " \textit
-nnoremap <Leader>i A \textit{}<Esc>i
+nn <Leader>i A \textit{}<Esc>i
  " \textbf
-nnoremap <Leader>B A \textbf{}<Esc>i
+nn <Leader>B A \textbf{}<Esc>i
 
  " external commands
 function Build()
-	AsyncRun pdflatex %<CR>
+	w
+	cd %:p:h
+	exe '!pdflatex '.shellescape(@%)
+endfunction
+function BuildShellEscape()
+	w
+	cd %:p:h
+	exe '!pdflatex -shell-escape '.shellescape(@%)
 endfunction
 function Darkify()
-	exe '!invert_pdf_colors.pl '.expand("%:r").'.pdf '.expand("%:r").'-dark.pdf'
-	exe '!rm '.expand("%:r").'.pdf'
-	exe '!mv '.expand("%:r").'-dark.pdf '.expand("%:r").'.pdf'
+	cd %:p:h
+	exe '!invert_pdf_colors.pl "'.expand("%:p:r").'.pdf" "'.expand("%:p:r").'-dark.pdf"'
+	exe '!rm "'.expand("%:p:r").'.pdf"'
+	exe '!mv "'.expand("%:p:r").'-dark.pdf" "'.expand("%:p:r").'.pdf"'
 endfunction
-function View()
-	exe '!evince -f '.expand("%:r").'.pdf &'
+function Deploy()
+	cd %:p:h
+	exe '!/opt/platform-tools/adb push "'.expand("%:p:r").'.pdf" /storage/sdcard1/Download'
+endfunction
+function ViewZathura()
+	cd %:p:h
+	exe '!zathura --mode fullscreen "'.expand("%:p:r").'.pdf" &'
+endfunction
+function ViewEvince()
+	cd %:p:h
+	exe '!evince -f "'.expand("%:p:r").'.pdf" &'
+endfunction
+function Clean()
+	cd %:p:h
+	exe '!rm *.log'
+	exe '!rm *.dvi'
+	exe '!rm *.aux'
+	exe '!rm -rf auto'
 endfunction
 
-nnoremap <Leader>m :call Build()<CR>
-nnoremap <Leader>d :call Darkify()<CR>
-nnoremap <Leader>v :call View()<CR>
+nn <Leader>m :call Build()<CR>
+nn <Leader>M :call BuildShellEscape()<CR>
+nn <Leader>d :call Darkify()<CR>
+nn <Leader>D :call Deploy()<CR>
+nn <Leader>v :call ViewZathura()<CR>
+nn <Leader>V :call ViewEvince()<CR>
+nn <leader>c :call Clean()<cr>

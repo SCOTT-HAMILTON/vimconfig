@@ -7,9 +7,6 @@
 [submodule "bundle/colorschemes"]
 	path = bundle/colorschemes
 	url = https://github.com/flazz/vim-colorschemes.git
-[submodule "vim-kormode"]
-	path = bundle/vim-kormode
-	url = https://github.com/dalguji/vim-kormode
 [submodule "bundle/vim-kormode"]
 	path = bundle/vim-kormode
 	url = https://github.com/dalguji/vim-kormode
@@ -19,3 +16,21 @@
 [submodule "bundle/vim-do"]
 	path = bundle/vim-do
 	url = https://github.com/joonty/vim-do
+[submodule "bundle/vim-lsp"]
+	path = bundle/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp
+[submodule "bundle/vim-asyncomplete"]
+	path = bundle/vim-asyncomplete
+	url = https://github.com/prabirshrestha/asyncomplete.vim
+[submodule "bundle/vim-asyncomplete-lsp"]
+	path = bundle/vim-asyncomplete-lsp
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
+[submodule "bundle/vim-lsp-settings"]
+	path = bundle/vim-lsp-settings
+	url = https://github.com/mattn/vim-lsp-settings
+[submodule "bundle/vim-async"]
+	path = bundle/vim-async
+	url = https://github.com/prabirshrestha/async.vim
+[submodule "bundle/vim-over"]
+	path = bundle/vim-over
+	url = https://github.com/osyo-manga/vim-over
