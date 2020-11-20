@@ -28,7 +28,7 @@ nn <Leader>B A \textbf{}<Esc>i
 function Build()
 	w
 	cd %:p:h
-	exe '!pdflatex '.shellescape(@%)
+	exe '!yaml2probatree -l '.shellescape(@%).' > tmp.o && pdflatex tmp.o && mv tmp.pdf '.expand("%:p:r").'.pdf'
 endfunction
 function BuildShellEscape()
 	w
