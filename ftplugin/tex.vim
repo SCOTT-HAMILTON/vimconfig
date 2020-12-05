@@ -30,10 +30,15 @@ function Build()
 	cd %:p:h
 	exe '!yaml2probatree -l '.shellescape(@%).' > tmp.o && pdflatex tmp.o && mv tmp.pdf '.expand("%:p:r").'.pdf'
 endfunction
+function BuildXeLatex()
+	w
+	cd %:p:h
+	exe '!yaml2probatree -l '.shellescape(@%).' > tmp.o && xelatex tmp.o && mv tmp.pdf '.expand("%:p:r").'.pdf'
+endfunction
 function BuildShellEscape()
 	w
 	cd %:p:h
-	exe '!pdflatex -shell-escape '.shellescape(@%)
+	exe '!yaml2probatree -l '.shellescape(@%).' > tmp.o && pdflatex -shell-escape tmp.o && mv tmp.pdf '.expand("%:p:r").'.pdf'
 endfunction
 function Darkify()
 	cd %:p:h
@@ -62,6 +67,7 @@ function Clean()
 endfunction
 
 nn <Leader>m :call Build()<CR>
+nn <Leader>X :call BuildXeLatex()<CR>
 nn <Leader>M :call BuildShellEscape()<CR>
 nn <Leader>d :call Darkify()<CR>
 nn <Leader>D :call Deploy()<CR>
