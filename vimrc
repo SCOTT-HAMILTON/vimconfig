@@ -9,6 +9,8 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
+autocmd FileType stanza setlocal commentstring=;\ %s
+
 set tabstop=4
 set shiftwidth=4
 
